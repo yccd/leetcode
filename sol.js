@@ -1,10 +1,10 @@
 // 136
 var singleNumber = function(nums) {
-    var a = 0;
+    var singleNum = 0;
     for (var i = 0; i < nums.length; i++) {
-        a = a ^ nums[i];
+        singleNum = singleNum ^ nums[i];
     }
-    return a;
+    return singleNum;
 };
 
 // 206
