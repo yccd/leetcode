@@ -48,3 +48,16 @@ var reverseList = function(head) {
     }
     return temp;
 };
+
+// 217
+var containsDuplicate = function(nums) {
+    var numHash = {};
+    for (var i = 0; i < nums.length; i++) {
+        if (numHash[nums[i]]) {
+            return true;
+        } else {
+            numHash[nums[i]] = 1;
+        }
+    }
+    return false;
+};
