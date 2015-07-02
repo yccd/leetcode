@@ -1,9 +1,20 @@
+// 1
+var twoSum = function(nums, target) {
+    var numHash = {};
+    for (var i = 0; i < nums.length; i++) {
+        if (!numHash[target - nums[i]]) {
+            numHash[nums[i]] = i + 1;
+        } else {
+            return [numHash[target - nums[i]], i + 1];
+        }
+    }
+};
+
 // 20
 var isValid = function(s) {
     if (s.length % 2 !== 0) {
         return false;
     }
-    
     var parenStack = [],
     parenMap = {
         '(' : ')',
