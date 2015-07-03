@@ -10,6 +10,33 @@ var twoSum = function(nums, target) {
     }
 };
 
+// 2
+var addTwoNumbers = function(l1, l2) {
+    var l3 = new ListNode(null), head = l3, l1Value, l2Value, sum = 0, overflow = 0;
+    
+    while (l1 !== null || l2 !== null || overflow !== 0) {
+        if (l1 !== null) {
+            l1Value = l1.val || 0;
+            l1 = l1.next;
+        }
+        if (l2 !== null) {
+            l2Value = l2.val || 0;
+            l2 = l2.next;
+        }
+        sum = l1Value + l2Value + overflow;
+        if (sum > 9) {
+            sum = sum - 10;
+            overflow = 1;
+        } else {
+            overflow = 0;
+        }
+        l3.next = new ListNode(sum);
+        l3 = l3.next;
+        l1Value = l2Value = sum = 0;
+    }
+    return head.next;
+};
+
 // 20
 var isValid = function(s) {
     if (s.length % 2 !== 0) {
