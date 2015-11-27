@@ -77,7 +77,7 @@ let removeDuplicates = nums => {
 
 // 27
 let removeElement = (nums, val) => {
-    for (var i = 0, j = 0; i < nums.length; i++) {
+    for (let i = 0, j = 0; i < nums.length; i++) {
         if (val !== nums[i]) {
             let tmp = nums[i];
             nums[i] = nums[j];
@@ -184,9 +184,9 @@ let generate = numRows => {
   if (numRows < 3) return result.slice(0, numRows);
 
   while (numRows > result.length) {
-    var prevArray = result[result.length - 1];
-    var nextRow = [1];
-    for (var i = 1; i < result.length; i++) {
+    let prevArray = result[result.length - 1];
+    let nextRow = [1];
+    for (let i = 1; i < result.length; i++) {
       nextRow.push(prevArray[i - 1] + prevArray[i]);
     }
     nextRow.push(1);
@@ -206,7 +206,7 @@ let getRow = rowIndex => {
   
   while (rowIndex > 1) {
     result = [1];
-    for (var i = 1; i < prev.length; i++) {
+    for (let i = 1; i < prev.length; i++) {
       result.push(prev[i - 1] + prev[i]);
     }
     result.push(1);
@@ -240,6 +240,20 @@ class MinStack {
     return this.minStack[this.stack.length - 1];
   }
 }
+
+// 169
+let majorityElement = nums => {
+  // moore's voting algorithm
+  let counter = 1;
+  return nums.reduce((majority, num, index) => {
+    if (num === majority) counter++;
+    else {
+      if (counter !== 0) counter--;
+      else majority = num;
+    }
+    return majority;
+  });
+};
 
 // 171
 let titleToNumber = s => {
@@ -278,7 +292,7 @@ let containsDuplicate = nums => {
 let containsNearbyDuplicate = (nums, k) => {
   let numMap = new Map();
   
-  for (var i = 0; i < nums.length; i++) {
+  for (let i = 0; i < nums.length; i++) {
     let num = nums[i];
     if (numMap.has(num) && i - numMap.get(num) <= k) return true;
     else numMap.set(num, i);
