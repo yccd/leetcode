@@ -21,9 +21,7 @@ let isValid = s => {
   for (let paren of s) {
     if ([')', '}', ']'].indexOf(paren) !== -1) {
       if (parenMap[parenStack.pop()] !== paren) return false;
-    } else {
-     parenStack.push(paren);  
-    }
+    } else parenStack.push(paren);  
   }
   return parenStack.length === 0;
 };
@@ -264,6 +262,23 @@ let titleToNumber = s => {
     strCode += (ch.charCodeAt(0) - 64) * Math.pow(26, index--); 
   }
   return strCode;
+};
+
+// 203
+let removeElements = (head, val) => {
+  if (!head) return null;
+  
+  let ptr = new ListNode(0);
+  let tmpHead = ptr;
+  
+  while (head) {
+    if (head.val !== val) {
+      ptr.next = new ListNode(head.val);
+      ptr = ptr.next;
+    }  
+    head = head.next;
+  }
+  return tmpHead.next;
 };
 
 // 206
