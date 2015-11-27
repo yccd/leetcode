@@ -216,6 +216,30 @@ let getRow = rowIndex => {
   return result;
 };
 
+// 155
+class MinStack {
+  constructor() {
+    this.stack = [];
+    this.minStack = [];
+  }
+  push(x) {
+    let lastIdx = this.stack.length - 1;
+    if (this.minStack[lastIdx] > x || this.minStack[lastIdx] === undefined ) this.minStack.push(x);
+    else this.minStack.push(this.minStack[lastIdx]);
+    this.stack.push(x);
+  }
+  pop() {
+    this.stack.pop();
+    this.minStack.pop();
+  }
+  top() {
+    return this.stack[this.stack.length - 1];
+  }
+  getMin() {
+    return this.minStack[this.stack.length - 1];
+  }
+}
+
 // 171
 let titleToNumber = s => {
   let strCode = 0;
@@ -247,6 +271,18 @@ let containsDuplicate = nums => {
       numMap.set(num, 1);
     }
     return false;
+};
+
+// 219
+let containsNearbyDuplicate = (nums, k) => {
+  let numMap = new Map();
+  
+  for (var i = 0; i < nums.length; i++) {
+    let num = nums[i];
+    if (numMap.has(num) && i - numMap.get(num) <= k) return true;
+    else numMap.set(num, i);
+  }
+  return false;
 };
 
 // 226
