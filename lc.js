@@ -224,11 +224,12 @@ class MinStack {
   }
   push(x) {
     let lastIdx = this.stack.length - 1;
-    if (this.minStack[lastIdx] > x || this.minStack[lastIdx] === undefined ) this.minStack.push(x);
+    if (this.minStack[lastIdx] > x || this.minStack[lastIdx] === undefined) this.minStack.push(x);
     else this.minStack.push(this.minStack[lastIdx]);
     this.stack.push(x);
   }
   pop() {
+    // should throw error if length === 0, but leetcode doesn't require it.
     this.stack.pop();
     this.minStack.pop();
   }
@@ -349,6 +350,20 @@ let isAnagram = (s, t) => {
       }
     }
     return charMap.size === 0;
+};
+
+// 257
+let binaryTreePaths = root => {
+  let paths = [];
+  let preOrder = (root, path) => {
+    if (!root) return;
+    path = path.concat(root.val);
+    if (!root.left && !root.right) paths.push(path.join('->'));  
+    preOrder(root.left, path);
+    preOrder(root.right, path);
+  }
+  preOrder(root, []);
+  return paths;
 };
 
 // 258 
