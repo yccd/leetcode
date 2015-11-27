@@ -9,6 +9,31 @@ let twoSum = (nums, target) => {
   }
 };
 
+// 13
+let romanToInt = function(s) {
+    let total = 0;
+    let romanMap = {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000
+    };
+    
+    for (let i = 0; i < s.length; i++) {
+        let nextCharValue = romanMap[s[i + 1]] || 0;
+        if (nextCharValue > romanMap[s[i]]) {
+            total += nextCharValue - romanMap[s[i]];
+            i++;
+        } else {
+            total += romanMap[s[i]];
+        }
+    }
+    return total;
+};
+
 // 20
 let isValid = s => {
   let parenMap = {
@@ -212,6 +237,16 @@ let getRow = rowIndex => {
     rowIndex--;
   }
   return result;
+};
+
+// 125
+let isPalindrome = s => {
+  s = s.replace(/\W/g, '').toUpperCase();
+  
+  for (let i = 0, j = s.length - 1; i < s.length / 2; i++, j--) {
+    if (s[i] !== s[j]) return false;
+  }
+  return true;
 };
 
 // 155
