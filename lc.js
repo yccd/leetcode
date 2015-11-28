@@ -2,15 +2,13 @@
 let twoSum = (nums, target) => {
   let numMap = new Map();
   for (let i = 0; i < nums.length; i++) {
-    if (numMap.has(target - nums[i])) {
-      return [numMap.get(target - nums[i]) + 1, i + 1];
-    }
+    if (numMap.has(target - nums[i])) return [numMap.get(target - nums[i]) + 1, i + 1];
     numMap.set(nums[i], i);
   }
 };
 
 // 13
-let romanToInt = function(s) {
+let romanToInt = s => {
     let total = 0;
     let romanMap = {
         I: 1,
@@ -365,6 +363,33 @@ let invertTree = root => {
     return head;
 };
 
+// 232
+class Queue {
+  constructor() {
+    this.stack = [];
+    this.secStack = [];
+  }
+  push(x) {
+    this.secStack = [];
+    this.stack.push(x);
+    let tmp = this.stack.slice();
+    while (this.stack.length) {
+      this.secStack.push(this.stack.pop());
+    }
+    this.stack = tmp;
+  }
+  pop() {
+    this.stack.pop();
+    return this.secStack.pop();
+  }
+  peek() {
+    return this.secStack[this.stack.length - 1];
+  }
+  empty() {
+    return this.stack.length === 0;
+  }
+}
+
 // 235
 let lowestCommonAncestor = (root, p, q) => {
   if (!root) return null;
@@ -450,6 +475,29 @@ let moveZeroes = nums => {
             j++;
         }
     }
+};
+
+// 290
+let wordPattern = (pattern, str) => {
+  let charMap = new Map();
+  let wordMap = new Map();
+  let words = str.split(' ');
+  let idx = 0;
+  
+  if (pattern.length !== words.length) return false;
+  
+  for (ch of pattern) {
+    if (charMap.has(ch)) {
+      if (charMap.get(ch) !== words[idx]) return false;
+    } else charMap.set(ch, words[idx]);
+    
+    if (wordMap.has(words[idx])) {
+      if (wordMap.get(words[idx]) !== ch) return false;  
+    } else wordMap.set(words[idx], ch);
+    
+    idx++;
+  }
+  return true;
 };
 
 // 292
