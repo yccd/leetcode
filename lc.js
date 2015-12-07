@@ -198,7 +198,7 @@ let levelOrder = root => {
 
 // 104
 let maxDepth = root => {
-    if (root === null) return 0;
+    if (!root) return 0;
     return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
 };
 
@@ -410,7 +410,7 @@ let containsNearbyDuplicate = (nums, k) => {
 let invertTree = root => {
     let head = root;
     let preOrder = root => {
-        if (root === null) return null;
+        if (!root) return null;
         let tmp = root.left;
         root.left = root.right;
         root.right = tmp;
