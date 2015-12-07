@@ -32,6 +32,22 @@ let romanToInt = s => {
     return total;
 };
 
+//14
+let longestCommonPrefix = strs => {
+  if (!strs.length) return '';
+  let sortedStrs = strs.sort((a, b) => b.length - a.length);
+  let prefix = sortedStrs[0];
+  for (let i = 1; i < sortedStrs.length; i++) {
+    for (let j = 0; j < prefix.length; j++) {
+      if (prefix[j] !== sortedStrs[i][j]) {
+        prefix = prefix.slice(0, j);
+        break;
+      }
+    }
+  }
+  return prefix;
+};
+
 // 20
 let isValid = s => {
   let parenMap = {
@@ -150,6 +166,19 @@ let isSameTree = (p, q) => {
     return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 };
 
+// 101
+let isSymmetric => root {
+    if (!root) return true;
+    return helper(root.left, root.right);
+    
+    function helper(left, right) {
+        if (!left && !right) return true;
+        else if (!left || !right) return false;
+        else if (left.val !== right.val) return false;
+        return helper(left.left, right.right) && helper(left.right, right.left);
+    }
+};
+
 // 102
 let levelOrder = root => {
     let preOrder = (root, order) => {
@@ -171,6 +200,22 @@ let levelOrder = root => {
 let maxDepth = root => {
     if (root === null) return 0;
     return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+};
+
+// 107
+let levelOrderBottom = root => {
+    if (!root) return [];
+    let result = [];
+    preOrder(root, 0);
+    return result.reverse();
+    
+    function preOrder(root, level) {
+        if (!root) return;
+        if (result[level]) result[level].push(root.val);
+        else result[level] = [root.val];
+        preOrder(root.left, level + 1);
+        preOrder(root.right, level + 1);
+    }
 };
 
 // 111
@@ -245,6 +290,19 @@ let isPalindrome = s => {
     if (s[i] !== s[j]) return false;
   }
   return true;
+};
+
+// 141
+let hasCycle = head => {
+    if (!head) return false;
+    let tmp = head;
+    
+    while (tmp.next && tmp.next.next) {
+        head = head.next;
+        tmp = tmp.next.next;
+        if (head === tmp) return true;
+    }
+    return false;
 };
 
 // 155
