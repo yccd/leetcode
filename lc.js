@@ -1,3 +1,27 @@
+// Incomplete
+// -------------------------------------------------------
+// 3 Need to think about this more
+var lengthOfLongestSubstring = function(s) {
+    var i = 0;
+    var j = 0;
+    var max = 0;
+    
+    var set = new Set();
+    
+    while (j < s.length) {
+        if (!set.has(s[j])) {
+            set.add(s[j++]);
+            max = Math.max(max, set.size);
+        } else {
+            set.delete(s[i++]);
+        }
+    }
+    return max;
+};
+
+// Complete
+// -------------------------------------------------------
+
 // 1
 let twoSum = (nums, target) => {
     let numMap = new Map();
@@ -139,6 +163,24 @@ let mergeTwoLists = (l1, l2) => {
   return head.next;
 };
 
+// 22
+let generateParenthesis = n => {
+    let result = [];
+    let helper = (builtStr, numLeftParen, numRightParen) => {
+      if ((numLeftParen === n) && (numRightParen === n)) {
+          result.push(builtStr);
+          return;
+      }
+      if (numLeftParen > n) return;
+      if (numRightParen > numLeftParen) return;
+      
+      helper(builtStr + '(', numLeftParen + 1, numRightParen);
+      helper(builtStr + ')', numLeftParen, numRightParen + 1);
+    }
+    
+    helper('', 0, 0);
+    return result;
+};
 
 // 26
 let removeDuplicates = nums => {
